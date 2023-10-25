@@ -11,7 +11,7 @@ class inputName():
         self.active = True
         self.input_text = ""
         self.size = 0
-        self.title = Text(None, 40, "Escreva seu nome: ", WHITE, [(WIDTH/2), (HEIGHT/2) - 250])
+        self.title = Text(None, 40, "Write your name: ", WHITE, [(WIDTH/2), (HEIGHT/2) - 250])
         self.alpha = 255
 
     def run(self):
@@ -19,8 +19,8 @@ class inputName():
 
         while self.active:
             screen.fill(BLACK)
-            for event in pygame.event.get(): # User did something
-                if event.type == pygame.QUIT: # If user clicked close
+            for event in pygame.event.get(): 
+                if event.type == pygame.QUIT: 
                     pygame.quit()
                     exit()
                 if event.type == KEYDOWN:
