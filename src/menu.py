@@ -31,8 +31,8 @@ class Menu():
             contents = f.read()
             self.player_name = contents
         self.title = Text(None, 60, "Earthquake Escape", WHITE, [(WIDTH/2), (HEIGHT/2) - 250])
-        self.sub = Text(None, 31, "Press ENTER Too PLAY", WHITE, [(WIDTH/2) - 140, HEIGHT - 200])
-        self.name = Text(None, 41, "Welcome " + self.player_name + "Too the game!!", WHITE, [(WIDTH/2) - 200, (HEIGHT/2) - 190])
+        self.sub = Text(None, 31, "Press ENTER to play", WHITE, [(WIDTH/2) - 140, HEIGHT - 200])
+        self.name = Text(None, 41, "Welcome " + self.player_name + " to the game!!", WHITE, [(WIDTH/2) - 200, (HEIGHT/2) - 190])
         self.btn_play = Button("white", (WIDTH/2) - 125, 320, "PLAY", self.next_scene)
         self.btn_options = Button("white", (WIDTH/2) - 125, 400, "Option", self.scene_options)
         self.btn_comandos = Button("white", (WIDTH/2) - 125, 480, "Description", self.comandos)
@@ -89,8 +89,8 @@ class Menu():
 
     def run(self):
         while self.active:
-            for event in pygame.event.get(): # User did something
-                if event.type == pygame.QUIT: # If user clicked close
+            for event in pygame.event.get(): 
+                if event.type == pygame.QUIT: 
                     self.quit_game()
                 if event.type == pygame.KEYDOWN:
                     if self.state == 1:

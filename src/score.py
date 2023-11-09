@@ -33,8 +33,8 @@ class Score():
         tx.draw_center()
         for i in range(self.max_page):
             try:
-                text = self.allscore[i + self.max_page*self.page].split(";")
-                strout = 0
+                text = self.allscores[i+self.maxppage*self.page].split(";")
+                strout = "{}° {} | Tempo: {}s | Vida: {}".format(i+self.maxppage*self.page + 1, text[0], text[1], text[2])
                 tx = Text(None, 30, strout, BLACK, (position_x + position_width/2, position_y + 100 + 25*i))
                 tx.draw_center()
             except:
