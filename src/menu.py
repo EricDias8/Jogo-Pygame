@@ -32,15 +32,15 @@ class Menu():
             self.player_name = contents
         self.title = Text(None, 60, "Earthquake Escape", WHITE, [(WIDTH/2), (HEIGHT/2) - 250])
         self.sub = Text(None, 31, "Press ENTER to play", WHITE, [(WIDTH/2) - 140, HEIGHT - 200])
-        self.name = Text(None, 41, "Welcome " + self.player_name + " to the game!!", WHITE, [(WIDTH/2) - 200, (HEIGHT/2) - 190])
-        self.btn_play = Button("white", (WIDTH/2) - 125, 320, "PLAY", self.next_scene)
-        self.btn_options = Button("white", (WIDTH/2) - 125, 400, "Option", self.scene_options)
-        self.btn_comandos = Button("white", (WIDTH/2) - 125, 480, "Description", self.comandos)
-        self.btn_score = Button("white", (WIDTH/2) - 125, 560, "Score", self.score_scene)
-        self.btn_quit = Button("white", (WIDTH/2) - 125, 640, "QUIT", self.quit_game)
+        self.name = Text(None, 41, "Welcome to the game " + self.player_name + "  run and survive !!", WHITE, [(WIDTH/2) - 350, (HEIGHT/2) - 190])
+        self.btn_play = Button("white", (WIDTH/2) - 125, 250, "PLAY", self.next_scene)
+        self.btn_options = Button("white", (WIDTH/2) - 125, 330, "Option", self.scene_options)
+        self.btn_comandos = Button("white", (WIDTH/2) - 125, 410, "Description", self.comandos)
+        self.btn_score = Button("white", (WIDTH/2) - 125, 490, "Score", self.score_scene)
+        self.btn_quit = Button("white", (WIDTH/2) - 125, 570, "QUIT", self.quit_game)
         self.btn_screen = Button("white", (WIDTH/2) - 125, 380, "Full Screen: OFF", self.screen_change)
         self.btn_mute = Button("white", (WIDTH/2) - 125, 460, "Music: ON", self.mute)
-        self.btn_back = Button("white", (WIDTH/2) - 125, 640, "Back", self.back)
+        self.btn_back = Button("white", (WIDTH/2) - 125, 570, "Back", self.back)
         self.btn_nextPage = Button("white", (WIDTH/2) + 100, HEIGHT - 250, "->", self.score.next_page)
         self.btn_backPage = Button("white", (WIDTH/2) - 380, HEIGHT - 250, "<-", self.score.back_page)
 
@@ -55,6 +55,10 @@ class Menu():
             self.music = True
 
     def back(self):
+        self.state = 2
+        self.score.page = 0
+
+    def description(self):
         self.state = 2
         self.score.page = 0
 
@@ -136,28 +140,35 @@ class Menu():
                 position_width = WIDTH/2 + 150
                 position_height = HEIGHT/2
                 pygame.draw.rect(self.screen, WHITE, pygame.Rect(position_x, position_y, position_width, position_height))
-                title = "Comand:"
-                description = "Sobre:"
-                text = "Para movimentar o jogador precione os direcionais (setas) do teclado."
-                text_2 = "Para interragir com objetos pressione a tecla 'Z' ou 'X' proximo a um objeto."
-                desc = "Earthquake Escape é um jogo onde o jogador precissa realizar escolhas ao se encontrar em um desastre natural"
-                tx = Text(None, 40, title, BLACK, (position_x + position_width/2 - 80, position_y + 15))
+                title = "COMAND:"
+                description = "ABOUT:"
+                text = "To move the player, press the directional buttons (arrows) on the keyboard"
+                text_2 = "or the a,w,s,d keys."
+                text_3 = "To interact with objects press the ' Z ', ' X ', ' J ' or ' K ' key next to an object."
+                desc = "Earthquake Escape is a game where the player needs to make choices"
+                desc_2 = " when finding themselves in a natural disaster"
+                tx = Text(None, 50, title, RED_2, (position_x + position_width/2 - 80, position_y + 15))
                 tx.draw()
-                tx = Text(None, 30, text, BLACK, (position_x + 10, position_y + 80))
+                tx = Text(None, 30, text, RED, (position_x + 10, position_y + 80))
                 tx.draw()
-                tx = Text(None, 30, text_2, BLACK, (position_x + 10, position_y + 110))
+                tx = Text(None, 30, text_2, RED, (position_x + 10, position_y + 110))
                 tx.draw()
-                tx = Text(None, 40, description, GRAY_2, (position_x + position_width/2 - 50, position_y + 140))
+                tx = Text(None, 30, text_3, RED, (position_x + 10, position_y + 140))
+                tx.draw()
+                tx = Text(None, 40, description, RED_2, (position_x + position_width/2 - 50, position_y + 180))
+                tx.draw()
+                tx = Text(None, 30, desc_2, RED, (position_x + 10, position_y + 280))
                 tx.draw()
                 lines = div_string(desc, position_width/12 - 1)
                 for i, line in enumerate(lines):
-                    tx = Text(None, 35, line, BLACK, (position_x + 10, position_y + 200 + i * 25))
+                    tx = Text(None, 30, line, RED, (position_x + 10, position_y + 240 + i * 25))
                     tx.draw()
                 self.btn_back.draw()
+                
             elif self.state == 5:
                 self.score.run()
                 self.btn_back.draw()
                 self.btn_backPage.draw()
                 self.btn_nextPage.draw()
             pygame.display.flip()
-            FPSclock.tick(30)
+            FPSclock.tick(60)

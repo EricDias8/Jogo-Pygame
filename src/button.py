@@ -20,7 +20,7 @@ class Button():
     def events(self, event):
         if event.type == pygame.MOUSEMOTION:
             if self.rect.collidepoint(event.pos):
-                self.color = GRAY
+                self.color = RED
                 self.render.update_text(self.text, WHITE)
             else:
                 self.color = WHITE

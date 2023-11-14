@@ -25,7 +25,7 @@ class Score():
     def run(self):
         position_x = WIDTH/5
         position_y = HEIGHT/4
-        position_width = WIDTH/2 + 100
+        position_width = WIDTH/2 + 200
         position_height = HEIGHT/2
         pygame.draw.rect(self.screen,WHITE,pygame.Rect(position_x,position_y,position_width,position_height))
         title = "SCORE:"
@@ -33,8 +33,8 @@ class Score():
         tx.draw_center()
         for i in range(self.max_page):
             try:
-                text = self.allscores[i+self.maxppage*self.page].split(";")
-                strout = "{}° {} | Tempo: {}s | Vida: {}".format(i+self.maxppage*self.page + 1, text[0], text[1], text[2])
+                text = self.allscores[i+self.max_page*self.page].split(";")
+                strout = "{}° {} | Tempo: {}s | Vida: {}".format(i+self.max_page*self.page + 1, text[0], text[1], text[2])
                 tx = Text(None, 30, strout, BLACK, (position_x + position_width/2, position_y + 100 + 25*i))
                 tx.draw_center()
             except:
