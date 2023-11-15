@@ -7,7 +7,8 @@ Siga os comandos abaixo para que tudo ocorra corretamente
 Instale as dependências dentro do terminal
 
 ```
-pip instalar -r biblioteca.txt
+pip install -r library.txt
+
 ```
 
 E depois execute este comando:
