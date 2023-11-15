@@ -23,19 +23,19 @@ class Score():
             self.page += 1
 
     def run(self):
-        position_x = WIDTH/5
-        position_y = HEIGHT/4
-        position_width = WIDTH/2 + 200
-        position_height = HEIGHT/2
-        pygame.draw.rect(self.screen,WHITE,pygame.Rect(position_x,position_y,position_width,position_height))
-        title = "SCORE:"
-        tx = Text(None, 40, title, BLACK, (position_x + position_width/2, position_y + 20))
+        bx = WIDTH/5
+        by = HEIGHT/4
+        bwd = WIDTH/2 + 100
+        bht = HEIGHT/2
+        pygame.draw.rect(self.screen, WHITE, pygame.Rect(bx, by, bwd, bht))
+        titulo = "Score:"
+        tx = Text(None, 40, titulo, BLACK, (bx + bwd/2, by + 20))
         tx.draw_center()
         for i in range(self.max_page):
             try:
-                text = self.allscores[i+self.max_page*self.page].split(";")
+                text = self.allscore[i+self.max_page*self.page].split(";")
                 strout = "{}° {} | Tempo: {}s | Vida: {}".format(i+self.max_page*self.page + 1, text[0], text[1], text[2])
-                tx = Text(None, 30, strout, BLACK, (position_x + position_width/2, position_y + 100 + 25*i))
+                tx = Text(None, 30, strout, BLACK, (bx + bwd/2, by + 100 + 25*i))
                 tx.draw_center()
             except:
                 break

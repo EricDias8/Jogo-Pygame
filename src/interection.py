@@ -48,7 +48,7 @@ class Textbox():
         pass
             
     def draw(self):
-        line_color = RED
+        line_color = ARROZ
         line_width = 5
         pygame.draw.rect(self.screen, self.color, self.rect)
         pygame.draw.line(self.screen, line_color, (self.x, self.y), (self.x + self.width, self.y), line_width)
@@ -56,9 +56,12 @@ class Textbox():
         pygame.draw.line(self.screen, line_color, (self.x, self.y), (self.x, self.y + self.height), line_width)
         pygame.draw.line(self.screen, line_color, (self.x + self.width, self.y), (self.x + self.width, self.y + self.height), line_width)
         lines = dividir_string(self.message, self.width/12 - 8)
+        
+        
         for i, line in enumerate(lines):
             tx = Text(None, 40, line, BLACK, (self.x + 10, self.y + 15 + i * 25))
             tx.draw()
+       
         for i, option in enumerate(self.options):
             tx = Text(None, 35, option, BLACK, (self.x + 20 + (i/(len(self.options) - 1))*(self.width - 100), self.y + self.height - 40))
             tx.draw()
@@ -71,50 +74,50 @@ class Textbox():
         return self.options[self.esc]
 
     def defineOption(self, text):
-        if(text == "mesa"):
-            self.message = "Voce deseja se esconder em baixo de uma mesa dessa sala?"
-            self.options = ["Sim", "Não"]
-        if(text == "escada"):
-            self.message = "Deseja pegar as escadas?"
-            self.options = ["Sim", "Não"]
-        if(text == "elevador"):
-            self.message = "Deseja pegar o elevador?"
-            self.options = ["Sim", "Não"]
+        if(text == "table"):
+            self.message = "You want to hide under a table in this room?"
+            self.options = ["Yes", "No"]
+        if(text == "stairs"):
+            self.message = "Want to take the stairs?"
+            self.options = ["Yes", "No"]
+        if(text == "elevator"):
+            self.message = "Do you want to take the elevator?"
+            self.options = ["Yes", "No"]
         if(text == "fase-1"):
-            self.message = "Um terremoto acabou de acontecer! Você terá 20 segundos para tomar uma ação!"
-            self.options = ["Continuar", ""]
+            self.message = "An earthquake just happened! You will have 30 seconds to take action!"
+            self.options = ["Continue", "OK"]
         if(text == "fase-4"):
-            self.message = "O terremeto parou, escolha rápido, deseja deseja pegar o elevador ou a escada"
-            self.options = ["Continuar", ""]
-        if(text == "fase-3-correto"):
-            self.message = "Escolha correta! mesmo com opções para fugir, o idela é esconder de baixo de uma mesa até parar"
-            self.options = ["Continuar", ""]
-        if(text == "fase-1-correto"):
-            self.message = "Escolha Correta! No meio de um terremoto o ideal é você se esconder em baixo de uma um lugar com cobertura como uma mesa para te proteger de coisas que podem cair na sua cabeça."
-            self.options = ["Continuar", ""]
-        if(text == "fase-2-correto"):
-            self.message = "Escolha Correta! Durante um terremoto as janelas podem quebrar e acabar ferindo você"
-            self.options = ["Continuar", ""]
-        if(text == "fase-2-incorreto"):
-            self.message = "Escolha Incorreta! Você precisa avaliar os objetos antes de se esconder. Janelas podem quebrar e te ferir durante um terremoto. Perdeu uma vida."
-            self.options = ["Continuar", ""]
-        if(text == "elevador-incorreto"):
-            self.message = "Errado!, durante um terremoto não se deve pegar um elevador, pode ser arriscado. Perdeu uma vida"
-            self.options = ["Continuar", ""]
-        if(text == "elevador-incorreto-2"):
-            self.message = "Errado! Mesmo se o terremoto parou, não é recomendavel pegar o elevador. Perdeu uma vida"
-            self.options = ["Continuar", ""]
-        if(text == "escada-incorreto"):
-            self.message = "Errado!, durante um terremoto não se deve andar nas escadas, pode ser arriscado. Perdeu uma vida"
-            self.options = ["Continuar", ""]
-        if(text == "escada-correto"):
-            self.message = "Perfeito!, se deve evitar o elevador mesmo após um terremoto."
-            self.options = ["Continuar", ""]
-        if(text == "erro-tempo"):
-            self.message = "Acabou o tempo! perdeu uma vida!"
-            self.options = ["Continuar", ""]
-        if(text == "fim"):
-            self.message = "Parabéns! você tomou todas as decisões corretas e finalizou o jogo!"
-            self.options = ["Continuar", ""]
+            self.message = "The earthquake has stopped, choose quickly, do you want to take the elevator or the stairs"
+            self.options = ["Continue", "OK"]
+        if(text == "fase-3-correct"):
+            self.message = "Correct choice! Even with options to escape, the idea is to hide under a table until you stop"
+            self.options = ["Continue", "OK"]
+        if(text == "fase-1-correct"):
+            self.message = "Choose Correct! In the middle of an earthquake, the ideal is to hide under a covered place like a table to protect you from things that could fall on your head."
+            self.options = ["Continue", "OK"]
+        if(text == "fase-2-correct"):
+            self.message = "Choose Correct! During an earthquake, windows can break and end up injuring you."
+            self.options = ["Continue", "OK"]
+        if(text == "fase-2-incorrect"):
+            self.message = "Incorrect Choice! You need to evaluate objects before hiding. Windows can break and injure you during an earthquake. Lost a life."
+            self.options = ["Continue", "OK"]
+        if(text == "elevador-incorrect"):
+            self.message = "Wrong!, during an earthquake You should not take an elevator, it can be risky. Lost a life"
+            self.options = ["Continue", "OK"]
+        if(text == "elevador-incorrect-2"):
+            self.message = "Wrong! Even if the earthquake has stopped, it is not recommended to take the elevator. Lost a life"
+            self.options = ["Continue", "OK"]
+        if(text == "stairs-incorrect"):
+            self.message = "Wrong!, during an earthquake You should not walk on stairs, it can be risky. Lost a life"
+            self.options = ["Continue", "OK"]
+        if(text == "stairs-correct"):
+            self.message = "Perfect! You should avoid the elevator even after an earthquake."
+            self.options = ["Continue", "OK"]
+        if(text == "Time-ERROR"):
+            self.message = "Time is up! lost a life!"
+            self.options = ["Continue", "OK"]
+        if(text == "END"):
+            self.message = "Congratulations! You made all the right decisions and finished the game!"
+            self.options = ["Continue", "OK"]
         else:
-            "Escolha um objeto par interagir"
+            "Choose an object to interact with"

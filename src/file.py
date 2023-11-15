@@ -3,6 +3,8 @@ import pygame, sys
 from pygame.locals import *
 import os
 
+# Get from internet
+
 class TextFile():
     def __init__(self, fileName):
        self.file = fileName

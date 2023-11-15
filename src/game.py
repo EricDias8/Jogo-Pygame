@@ -1,9 +1,6 @@
-# Imports
 import pygame, os, sys, random, pytmx, math
 from pygame.locals import *
 from pytmx.util_pygame import load_pygame
-
-# Modulos
 from src.settings import *
 from src.models.player import Player
 from src.models.npc import Npc
@@ -33,13 +30,11 @@ class Game():
         spriteimg = pygame.image.load(os.path.join('assets','sprite.png')).convert_alpha()
         entitiesList = []
         sprite = SpriteSheet(spriteimg)
-        player = Player(sprite, 600, 300, 10, 64, 70, 1)
+        player = Player(sprite, 600, 300, 5, 64, 70, 1)
         entitiesList.append(player)
         player.life = life_map
         desk = pygame.image.load(os.path.join('assets','desk.png')).convert_alpha()
         rectdesk = desk.get_rect()
-        deskobj = Entity(desk, 300, 200, 0, rectdesk.width, rectdesk.height, 1, "level1")
-        deskobj2 = Entity(desk, 800, 300, 0, rectdesk.width, rectdesk.height, 1, "level2")
         textbox = Textbox()
         spriteimgnpc = pygame.image.load(os.path.join('assets','npc.png')).convert_alpha()
         spritenpc = SpriteSheet(spriteimgnpc)
@@ -65,7 +60,7 @@ class Game():
 
         self.fase = map
         self.resposta = ""
-        start_ticks=pygame.time.get_ticks() #starter tick
+        start_ticks=pygame.time.get_ticks() 
         self.ended = False
         ui = UI()
         self.time = 0
@@ -77,10 +72,7 @@ class Game():
         tmxdata_1 = load_pygame('map/lvlone.tmx')
         tmxdata_2 = load_pygame('map/lvltwo.tmx')
         tmxdata_3 = load_pygame('map/lvlthree.tmx')
-        '''
-        if self.fase == 2:
-            area1.changeArea(0,0,area1.width, area1.height)
-        '''
+        
         self.continuar = 0
         self.paused = False
         if self.fase == 1:
@@ -94,7 +86,7 @@ class Game():
             textbox.active = True
         if self.fase == 5:
             self.continuar = 5
-            textbox.defineOption("fim")
+            textbox.defineOption("END")
             textbox.active = True
             self.direcionarMenu = True
         
@@ -115,20 +107,18 @@ class Game():
                         for x, y, gid, in layer:
                             tile = imagenew(gid)
                             if tile:
-                                # Calculo do Thibas
                                 calc_x = (math.sqrt(2) * tmxdata_1.width * x  - math.sqrt(2) * tmxdata_1.height * y ) / 0.885
                                 calc_y =  (math.sqrt(2) * tmxdata_1.width * x  + math.sqrt(2) * tmxdata_1.height * y) / 1.77
-                                # print(x, y)
                                 if layer.name == "background":
                                     screen.blit(tile, (calc_x+610, calc_y+80))
                                 else:
                                     screen.blit(tile, (calc_x+610, calc_y-20)) 
-                                    melly = Entity(tile, (calc_x+635), (calc_y+70), 0, tile.get_width() - 40, tile.get_height() - 110, 1, "level1")
-                                    #melly.DrawHitbox(screen)
+                                    map_declaration_display = Entity(tile, (calc_x+635), (calc_y+70), 0, tile.get_width() - 40, tile.get_height() - 110, 1, "level1")
+                                    
                                     for i in range(len(entitiesList)):
                                         e = entitiesList[i]
-                                        #e.DrawHitbox(screen)
-                                        if(e.isColliding(melly)):
+                                      
+                                        if(e.isColliding(map_declaration_display)):
                                             e.colisao = True
                                             e.block()
                                         else:
@@ -140,20 +130,18 @@ class Game():
                         for x, y, gid, in layer:
                             tile = imagenew(gid)
                             if tile:
-                                # Calculo do Thibas
                                 calc_x = (math.sqrt(2) * tmxdata_2.width * x  - math.sqrt(2) * tmxdata_2.height * y ) / 0.885
                                 calc_y =  (math.sqrt(2) * tmxdata_2.width * x  + math.sqrt(2) * tmxdata_2.height * y) / 1.77
-                                # print(x, y)
                                 if layer.name == "background":
                                     screen.blit(tile, (calc_x+610, calc_y+80))
                                 else:
                                     screen.blit(tile, (calc_x+610, calc_y-20)) 
-                                    melly = Entity(tile, (calc_x+635), (calc_y+70), 0, tile.get_width() - 40, tile.get_height() - 110, 1, "level1")
-                                    #melly.DrawHitbox(screen)
+                                    map_declaration_display = Entity(tile, (calc_x+635), (calc_y+70), 0, tile.get_width() - 40, tile.get_height() - 110, 1, "level1")
+                                    
                                     for i in range(len(entitiesList)):
                                         e = entitiesList[i]
-                                        #e.DrawHitbox(screen)
-                                        if(e.isColliding(melly)):
+                                        
+                                        if(e.isColliding(map_declaration_display)):
                                             e.colisao = True
                                             e.block()
                                         else:
@@ -166,28 +154,26 @@ class Game():
                         for x, y, gid, in layer:
                             tile = imagenew(gid)
                             if tile:
-                                # Calculo do Thibas
                                 calc_x = (math.sqrt(2) * tmxdata_3.width * x  - math.sqrt(2) * tmxdata_3.height * y ) / 0.885
-                                calc_y =  (math.sqrt(2) * tmxdata_3.width * x  + math.sqrt(2) * tmxdata_3.height * y) / 1.77
-                                # print(x, y)
+                                calc_y =  (math.sqrt(2) * tmxdata_3.width * x  + math.sqrt(2) * tmxdata_3.height * y) / 1.77                                
                                 if layer.name == "background":
                                     screen.blit(tile, (calc_x+610, calc_y+80))
                                 else:
                                     screen.blit(tile, (calc_x+610, calc_y-20)) 
-                                    melly = Entity(tile, (calc_x+635), (calc_y+70), 0, tile.get_width() - 40, tile.get_height() - 110, 1, "level1")
-                                    #melly.DrawHitbox(screen)
+                                    map_declaration_display = Entity(tile, (calc_x+635), (calc_y+70), 0, tile.get_width() - 40, tile.get_height() - 110, 1, "level1")
+                                    
                                     for i in range(len(entitiesList)):
                                         e = entitiesList[i]
-                                        #e.DrawHitbox(screen)
-                                        if(e.isColliding(melly)):
+                                     
+                                        if(e.isColliding(map_declaration_display)):
                                             e.colisao = True
                                             e.block()
                                         else:
                                             e.colisao = False
                 
             
-            for event in pygame.event.get(): # User did something
-                if event.type == pygame.QUIT: # If user clicked close
+            for event in pygame.event.get(): 
+                if event.type == pygame.QUIT: 
                     pygame.quit()
                     exit()
 
@@ -214,36 +200,88 @@ class Game():
                         player.actualDirection = player.directions[1]
                         player.down = True
                         player.cur_frame = 0
+                    
+                    if event.key == K_a:
+                        player.actualDirection = player.directions[0]
+                        player.currentFrame = player.walkSpriteFrame[0]
+                        player.left = True
+                        player.cur_frame = 0
+                    if event.key == K_d:
+                        player.actualDirection = player.directions[2]
+                        player.currentFrame = player.walkSpriteFrame[1]
+                        player.right = True
+                        player.cur_frame = 0
+                    if event.key == K_w:
+                        player.actualDirection = player.directions[3]
+                        player.up = True
+                        player.cur_frame = 0
+                    if event.key == K_s:
+                        player.actualDirection = player.directions[1]
+                        player.down = True
+                        player.cur_frame = 0
+
                     if event.key == K_z:
                         pos = player.getPlayerFront(screen)
                         if self.fase == 1:
                             if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]) or area3.checkHitBox(pos[0], pos[1]) or area4.checkHitBox(pos[0], pos[1]) or area5.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("mesa")
+                                textbox.defineOption("table")
                                 textbox.active = True
                         if self.fase == 2:
                             if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("mesa")
+                                textbox.defineOption("table")
                                 textbox.active = True
                             if area3.checkHitBox(pos[0], pos[1]) or area4.checkHitBox(pos[0], pos[1]) or area5.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("mesa")
+                                textbox.defineOption("table")
                                 textbox.active = True
                         if self.fase == 3:
                             if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]) or area3.checkHitBox(pos[0], pos[1]) or area4.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("mesa")
+                                textbox.defineOption("table")
                                 textbox.active = True
                             if area5.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("escada")
+                                textbox.defineOption("stairs")
                                 textbox.active = True
                             if areaElevador.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("elevador")
+                                textbox.defineOption("elevator")
                                 textbox.active = True
                         if self.fase == 4:
                             if area5.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("escada")
+                                textbox.defineOption("stairs")
                                 textbox.active = True
                             if areaElevador.checkHitBox(pos[0], pos[1]):
-                                textbox.defineOption("elevador")
+                                textbox.defineOption("elevator")
                                 textbox.active = True
+                    if event.key == K_k:
+                        pos = player.getPlayerFront(screen)
+                        if self.fase == 1:
+                            if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]) or area3.checkHitBox(pos[0], pos[1]) or area4.checkHitBox(pos[0], pos[1]) or area5.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("table")
+                                textbox.active = True
+                        if self.fase == 2:
+                            if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("table")
+                                textbox.active = True
+                            if area3.checkHitBox(pos[0], pos[1]) or area4.checkHitBox(pos[0], pos[1]) or area5.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("table")
+                                textbox.active = True
+                        if self.fase == 3:
+                            if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]) or area3.checkHitBox(pos[0], pos[1]) or area4.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("table")
+                                textbox.active = True
+                            if area5.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("stairs")
+                                textbox.active = True
+                            if areaElevador.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("elevator")
+                                textbox.active = True
+                        if self.fase == 4:
+                            if area5.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("stairs")
+                                textbox.active = True
+                            if areaElevador.checkHitBox(pos[0], pos[1]):
+                                textbox.defineOption("elevator")
+                                textbox.active = True
+
+
                 elif event.type == KEYDOWN and textbox.active == True:
                     player.left = False
                     player.right = False
@@ -256,7 +294,23 @@ class Game():
                         elif self.continuar == 3:
                             self.continuar = 4
                         elif self.continuar == 5:
-                            self.max_time = 20
+                            self.max_time = 30
+                            textbox.active = False
+                            self.continuar = 0
+                            self.paused = False
+                            start_ticks=pygame.time.get_ticks() 
+                            if self.direcionarMenu == True:
+                                self.continuar = 6
+                        elif self.ended == True:
+                            self.continuar = 6
+                    if event.key == K_k:
+                        self.resposta = textbox.getChoice()
+                        if self.continuar == 1:
+                            self.continuar = 2
+                        elif self.continuar == 3:
+                            self.continuar = 4
+                        elif self.continuar == 5:
+                            self.max_time = 30
                             textbox.active = False
                             self.continuar = 0
                             self.paused = False
@@ -271,6 +325,13 @@ class Game():
                     if event.key == K_RIGHT:
                         textbox.esc += 1
                         textbox.change_esc()
+                    if event.key == K_a:
+                        textbox.esc -= 1
+                        textbox.change_esc()
+                    if event.key == K_d:
+                        textbox.esc -= 1
+                        textbox.change_esc()
+
                     
                 if event.type == KEYUP and textbox.active == False:
                     if event.key == K_LEFT:
@@ -286,6 +347,19 @@ class Game():
                         player.down = False
                         player.cur_frame = 0
 
+                    if event.key == K_a:
+                        player.left = False
+                        player.cur_frame = 0
+                    elif event.key == K_d:
+                        player.right = False
+                        player.cur_frame = 0
+                    elif event.key == K_w:
+                        player.up = False
+                        player.cur_frame = 0
+                    elif event.key == K_s:
+                        player.down = False
+                        player.cur_frame = 0
+
             if(player.x < -20 ):
                 player.x = -20
             if(player.x > WIDTH-100):
@@ -297,59 +371,59 @@ class Game():
                 
             if textbox.choiceMade == True:
                 if self.fase == 1:
-                    if self.resposta == "Sim":
-                        textbox.defineOption("fase-1-correto")
+                    if self.resposta == "Yes":
+                        textbox.defineOption("fase-1-correct")
                         textbox.active = True
                         player.time += int(text_content)
                         self.next_stage = True
                         textbox.choiceMade = False
                         self.continuar = 1
                 elif self.fase == 2:
-                    if self.resposta == "Sim":
+                    if self.resposta == "Yes":
                         if area1.checkHitBox(pos[0], pos[1]) or area2.checkHitBox(pos[0], pos[1]):
-                            textbox.defineOption("fase-2-correto")
+                            textbox.defineOption("fase-2-correct")
                             textbox.active = True
                             player.time += int(text_content)
                             self.next_stage = True
                             textbox.choiceMade = False
                             self.continuar = 1
                         else:
-                            textbox.defineOption("fase-2-incorreto")
+                            textbox.defineOption("fase-2-incorrect")
                             textbox.active = True
                             self.next_stage = True
                             textbox.choiceMade = False
                             self.continuar = 3
                 elif self.fase == 3:
-                    if self.resposta == "Sim":
+                    if self.resposta == "Yes":
                         if areaElevador.checkHitBox(pos[0], pos[1]):
-                            textbox.defineOption("elevador-incorreto")
+                            textbox.defineOption("elevator-incorrect")
                             textbox.active = True
                             self.next_stage = True
                             textbox.choiceMade = False
                             self.continuar = 3
                         elif area5.checkHitBox(pos[0], pos[1]):
-                            textbox.defineOption("escada-incorreto")
+                            textbox.defineOption("stairs-incorrect")
                             textbox.active = True
                             self.next_stage = True
                             textbox.choiceMade = False
                             self.continuar = 3
                         else:
-                            textbox.defineOption("fase-1-correto")
+                            textbox.defineOption("fase-1-correct")
                             textbox.active = True
                             player.time += int(text_content)
                             self.next_stage = True
                             textbox.choiceMade = False
                             self.continuar = 1
                 elif self.fase == 4:
-                    if self.resposta == "Sim":
+                    if self.resposta == "Yes":
                         if areaElevador.checkHitBox(pos[0], pos[1]):
-                            textbox.defineOption("elevador-incorreto-2")
+                            textbox.defineOption("elevador-incorrect-2")
                             textbox.active = True
                             self.next_stage = True
                             textbox.choiceMade = False
                             self.continuar = 3
                         if area5.checkHitBox(pos[0], pos[1]):
-                            textbox.defineOption("escada-correto")
+                            textbox.defineOption("stairs-correct")
                             textbox.active = True
                             player.time += int(text_content)
                             self.next_stage = True
@@ -362,7 +436,7 @@ class Game():
                 self.life -= 1
                 self.run(self.fase, self.life, player.time)        
             elif (self.time > 20 and self.next_stage == False):
-                textbox.defineOption("erro-tempo")
+                textbox.defineOption("Time-ERROR")
                 textbox.active = True
                 self.continuar = 3
             elif self.continuar == 0 and self.paused == False:
